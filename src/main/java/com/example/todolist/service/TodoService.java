@@ -15,22 +15,19 @@ import java.util.List;
 public class TodoService {
     private final TodoRepository repo;
 
-    public TodoEntity add (TodoRequest request) {
-        TodoEntity todoEntitiy = new TodoEntity();
+    public TodoEntity add(TodoRequest request) {
+        TodoEntity todoEntity = new TodoEntity();
 
-        todoEntitiy.setTitle(request.getTitle());
-        todoEntitiy.setOrder(request.getOrder());
-        todoEntitiy.setCompleted(request.getCompleted());
+        todoEntity.setTitle(request.getTitle());
+        todoEntity.setOrder(request.getOrder());
+        todoEntity.setCompleted(request.getCompleted());
 
-        TodoEntity result = this.repo.save(todoEntitiy); // save메소드는 저장된 결과값을 반환한다.
-
-        return result;
+        return this.repo.save(todoEntity);
     }
 
     public TodoEntity searchById (Long id) {
-        TodoEntity result = this.repo.findById(id)
+        return this.repo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        return result;
     }
 
     public List<TodoEntity> searchAll() {
