@@ -1,7 +1,7 @@
 package com.example.todolist.service;
 
+import com.example.todolist.DTO.TodoDTO;
 import com.example.todolist.model.TodoEntity;
-import com.example.todolist.model.TodoRequest;
 import com.example.todolist.repository.TodoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,51 +13,49 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class TodoService {
-    private final TodoRepository repo;
+    private final TodoRepository toDoRepository;
 
-    public TodoEntity add(TodoRequest request) {
-        TodoEntity todoEntity = new TodoEntity();
-
-        todoEntity.setTitle(request.getTitle());
-        todoEntity.setOrder(request.getOrder());
-        todoEntity.setCompleted(request.getCompleted());
-
-        return this.repo.save(todoEntity);
+    public TodoEntity add(TodoDTO todoDTO) {
+        TodoEntity toDoEntity = TodoEntity.builder()
+                .title(todoDTO.getTitle())
+                .order(todoDTO.getOrder())
+                .completed(todoDTO.getCompleted())
+                .build();
+        return this.toDoRepository.save(toDoEntity);
     }
 
-    public TodoEntity searchById (Long id) {
-        return this.repo.findById(id)
+    public TodoEntity searchById(Long id) {
+        return this.toDoRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     public List<TodoEntity> searchAll() {
-        return this.repo.findAll();
+        return this.toDoRepository.findAll();
     }
 
-    public TodoEntity updateById(Long id, TodoRequest request) {
-        TodoEntity entity = this.searchById(id);
+    public TodoEntity updateById(Long id, TodoDTO todoDTO) {
+        TodoEntity todoEntity = this.searchById(id);
 
-        if (request.getTitle() != null) {
-            entity.setTitle(request.getTitle());
+        if (todoDTO.getTitle() != null) {
+            todoEntity.setTitle(todoDTO.getTitle());
         }
 
-        if (request.getOrder() != null) {
-            entity.setOrder(request.getOrder());
+        if (todoDTO.getOrder() != null) {
+            todoEntity.setOrder(todoDTO.getOrder());
         }
 
-        if (request.getCompleted() != null) {
-            entity.setCompleted(request.getCompleted());
+        if (todoDTO.getCompleted() != null) {
+            todoEntity.setCompleted(todoDTO.getCompleted());
         }
 
-        return this.repo.save(entity);
-
+        return this.toDoRepository.save(todoEntity);
     }
 
-    public void deleteById (Long id) {
-        this.repo.deleteById(id);
+    public void deleteById(Long id) {
+        this.toDoRepository.deleteById(id);
     }
 
-    public void deleteByAll () {
-        this.repo.deleteAll();
+    public void deleteAll() {
+        this.toDoRepository.deleteAll();
     }
 }

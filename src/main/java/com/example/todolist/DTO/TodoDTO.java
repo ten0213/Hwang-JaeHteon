@@ -1,25 +1,27 @@
-package com.example.todolist.model;
+package com.example.todolist.DTO;
 
+import com.example.todolist.model.TodoEntity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
-public class TodoResponse {
+@NoArgsConstructor
+public class TodoDTO {
     private Long id;
     private String title;
     private Long order;
     private Boolean completed;
     private String url;
 
-    public TodoResponse(TodoEntity todoEntity) {
+    public TodoDTO(TodoEntity todoEntity, String serviceUrl) {
         this.id = todoEntity.getId();
         this.title = todoEntity.getTitle();
         this.order = todoEntity.getOrder();
         this.completed = todoEntity.getCompleted();
-
-        this.url = "http://localhost:8080/" + this.id;
+        this.url = serviceUrl + this.id;
     }
 }
