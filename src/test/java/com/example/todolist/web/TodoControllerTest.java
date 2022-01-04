@@ -1,6 +1,4 @@
 package com.example.todolist.web;
-
-
 import com.example.todolist.model.TodoModel;
 import com.example.todolist.model.TodoRequest;
 import com.example.todolist.service.TodoService;
