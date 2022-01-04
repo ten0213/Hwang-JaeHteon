@@ -1,61 +1,42 @@
 package com.example.todolist.service;
 
-import com.example.todolist.DTO.TodoDTO;
-import com.example.todolist.model.TodoEntity;
-import com.example.todolist.repository.TodoRepository;
+import com.example.todolist.model.TodoModel;
+import com.example.todolist.model.TodoRequest;
+import com.example.todolist.service.repository.TodoRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class TodoService {
-    private final TodoRepository toDoRepository;
 
-    public TodoEntity add(TodoDTO todoDTO) {
-        TodoEntity toDoEntity = TodoEntity.builder()
-                .title(todoDTO.getTitle())
-                .order(todoDTO.getOrder())
-                .completed(todoDTO.getCompleted())
-                .build();
-        return this.toDoRepository.save(toDoEntity);
+    private final TodoRepository todoRepository;
+
+    //    1	todo 리스트 목록에 아이템을 추가
+    public TodoModel add(TodoRequest request) {
+        return null;
     }
-
-    public TodoEntity searchById(Long id) {
-        return this.toDoRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    //    2	todo  리스트 목록 중 특정 아이템을 조회
+    public TodoModel searchById(Long id) {
+        return null;
     }
-
-    public List<TodoEntity> searchAll() {
-        return this.toDoRepository.findAll();
+    //    3	todo 리스트 전체 목록을 조회
+    public List<TodoModel> searchAll() {
+        return null;
     }
-
-    public TodoEntity updateById(Long id, TodoDTO todoDTO) {
-        TodoEntity todoEntity = this.searchById(id);
-
-        if (todoDTO.getTitle() != null) {
-            todoEntity.setTitle(todoDTO.getTitle());
-        }
-
-        if (todoDTO.getOrder() != null) {
-            todoEntity.setOrder(todoDTO.getOrder());
-        }
-
-        if (todoDTO.getCompleted() != null) {
-            todoEntity.setCompleted(todoDTO.getCompleted());
-        }
-
-        return this.toDoRepository.save(todoEntity);
+    //    4	todo 리스트 목록 중 특정 아이템을 수정
+    public TodoModel updateById(Long id) {
+        return null;
     }
-
+    //    5	todo 리스트 목록 중 특정 아이템을 삭제
     public void deleteById(Long id) {
-        this.toDoRepository.deleteById(id);
+
+    }
+    //    6	todo 리스트 전체 목록을 삭제
+    public void deleteAll() {
+
     }
 
-    public void deleteAll() {
-        this.toDoRepository.deleteAll();
-    }
 }

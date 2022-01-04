@@ -6,7 +6,7 @@ plugins {
     id 'java'
 }
 
-group 'net.happykoo'
+group 'com.example.todolist'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -16,11 +16,15 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-rest'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'junit:junit:4.13.2'
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    implementation 'org.webjars.npm:create-torrent:3.33.0'
 
     runtimeOnly 'com.h2database:h2'
 
     annotationProcessor 'org.projectlombok:lombok'
     compileOnly 'org.projectlombok:lombok'
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
 test {
