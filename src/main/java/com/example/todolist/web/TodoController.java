@@ -3,19 +3,41 @@ package com.example.todolist.web;
 import com.example.todolist.model.TodoModel;
 import com.example.todolist.model.TodoResponse;
 import com.example.todolist.service.TodoService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
-@AllArgsConstructor
-@RestController
-@RequestMapping("/")
+@RequiredArgsConstructor
+@Controller
 public class TodoController {
 
     private final TodoService service;
+
+    @GetMapping(path = "/")
+    public String index(){
+        return "index";
+    }
+
+    @GetMapping(path = "/test")
+    @ResponseBody
+    public String test(){
+        //logic
+        return "TEST";
+    }
+
+    @GetMapping(path = "/test2")
+    public ResponseEntity<TodoResponse> test2(){
+        TodoResponse result = TodoResponse.builder()
+                .id(1L)
+                .completed(true)
+                .order(1L)
+                .title("제목")
+                .build();
+        return ResponseEntity.ok(result);
+    }
 
     @PostMapping
     public ResponseEntity<TodoResponse> create() {
