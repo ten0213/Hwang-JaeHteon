@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -18,6 +19,26 @@ HELLO WORLD
   </tr>
 </table>
 </body>
+=======
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+  <head>
+    <title>HELLO</title>
+  </head>
+  <body>
+  HELLO WORLD
+  <button onclick="click1()">버튼1</button>
+  <button onclick="click2()">버튼2</button>
+  <button onclick="click3()">추가</button>
+  <table id="list">
+    <tr>
+      <td>
+        <input type="checkbox">123
+      </td>
+    </tr>
+  </table>
+  </body>
+>>>>>>> github/master
 </html>
 
 <script>
@@ -29,8 +50,13 @@ HELLO WORLD
         "Content-Type": "application/json",
       }
     })
+<<<<<<< HEAD
             .then((res) => res.text())
             .then((res) => list.innerText = res);
+=======
+    .then((res) => res.text())
+    .then((res) => list.innerText = res);
+>>>>>>> github/master
   }
 
   const click2 = async () => {
@@ -40,8 +66,13 @@ HELLO WORLD
         "Content-Type": "application/json",
       }
     })
+<<<<<<< HEAD
             .then((res) => res.json())
             .then((res) => console.log(res));
+=======
+    .then((res) => res.json())
+    .then((res) => console.log(res));
+>>>>>>> github/master
   }
 
   const click3 = () => {
@@ -54,4 +85,8 @@ HELLO WORLD
     td.innerText = '123';
     list.appendChild(tr);
   }
+<<<<<<< HEAD
 </script>
+=======
+</script>
+>>>>>>> github/master
