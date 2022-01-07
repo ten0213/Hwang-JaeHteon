@@ -14,11 +14,11 @@ public class TodoResponse {
     private Boolean completed;
     private String url;
 
-    public TodoResponse(TodoModel todomodel) {
-        this.id = todomodel.getId();
-        this.title = todomodel.getTitle();
-        this.order = todomodel.getOrder();
-        this.completed = todomodel.getCompleted();
+    public TodoResponse(TodoEntity todoEntity) {
+        this.id = todoEntity.getId();
+        this.title = todoEntity.getTitle();
+        this.order = todoEntity.getOrder();
+        this.completed = todoEntity.getCompleted();
 
         this.url = "http://localhost:8080/" + this.id;
     }
