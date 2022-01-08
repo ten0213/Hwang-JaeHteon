@@ -8,12 +8,9 @@
             min-width: 250px;
         }
 
-
         * {
             box-sizing: border-box;
         }
-
-
 
         ul li {
             cursor: pointer;
@@ -24,18 +21,15 @@
             font-size: 18px;
             transition: 0.2s;
 
-
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
         }
 
-
         ul li:nth-child(odd) {
             background: #f9f9f9;
         }
-
 
         ul li:hover {
             background: #ddd;
@@ -165,14 +159,27 @@
 
 
     function newElement() {
-        var li = document.createElement("li");
         var inputValue = document.getElementById("myInput").value;
+        fetch("/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title: inputValue,
+                order: 1,
+                completed: true
+            }),
+        })
+            .then((res) => res.json())
+            .then((res) => initTodoList(res));
+        var li = document.createElement("li");
         var t = document.createTextNode(inputValue);
         li.appendChild(t);
         if (inputValue === '') {
             alert("You must write something!");
         } else {
-            document.getElementById("myUL").appendChild(li);
+            document.getElementById("myExistData").appendChild(li);
         }
         document.getElementById("myInput").value = "";
 
@@ -187,6 +194,29 @@
                 var div = this.parentElement;
                 div.style.display = "none";
             }
+        }
+
+
+    }
+
+
+    window.onload = function () {
+        fetch("/todolist", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then((res) => res.json())
+        .then((res) => initTodoList(res));
+    }
+
+    const initTodoList = (todolist) => {
+        const list = document.getElementById("myExistData");
+        for (let i = 0; i < todolist.length; i++) {
+            const li = document.createElement("li");
+            li.innerText = todolist[i].title;
+            list.appendChild(li);
         }
     }
 </script>

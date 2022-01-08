@@ -6,6 +6,7 @@ import com.example.todolist.model.TodoResponse;
 import com.example.todolist.service.TodoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,8 +43,7 @@ public class TodoController {
         TodoEntity result = this.service.searchById(id);
         return ResponseEntity.ok(new TodoResponse(result));
     }
-
-    @GetMapping
+    @GetMapping(path = "todolist")
     public ResponseEntity<List<TodoResponse>> readAll() {
         System.out.println("READ ALL");
         List<TodoEntity> list = this.service.searchAll();
@@ -72,4 +72,5 @@ public class TodoController {
         this.service.deleteAll();
         return ResponseEntity.ok().build();
     }
+
 }
