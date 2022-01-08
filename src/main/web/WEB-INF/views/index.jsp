@@ -74,7 +74,6 @@
             color: white;
         }
 
-
         .header {
             background-color: #f44336;
             padding: 30px 40px;
@@ -82,13 +81,11 @@
             text-align: center;
         }
 
-
         .header:after {
             content: "";
             display: table;
             clear: both;
         }
-
 
         input {
             margin: 0;
@@ -99,7 +96,6 @@
             float: left;
             font-size: 16px;
         }
-
 
         .addBtn {
             padding: 10px;
@@ -118,6 +114,7 @@
             background-color: #bbb;
         }
     </style>
+    <title>todolist</title>
 </head>
 <body>
 
@@ -127,7 +124,7 @@
     <span onclick="newElement()" class="addBtn">Add</span>
 </div>
 
-<ul id="myUL">
+<ul id="myExistData">
     <li>Hit the gym</li>
     <li class="checked">pay eaten</li>
     <li>go to SKHU</li>
