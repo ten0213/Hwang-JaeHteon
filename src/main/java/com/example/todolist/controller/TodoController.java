@@ -59,14 +59,14 @@ public class TodoController {
         return ResponseEntity.ok(result);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping(path = "todolist/{id}")
     public ResponseEntity<?> deleteOne(@PathVariable Long id) {
         System.out.println("DELETE ONE");
         this.service.deleteById(id);
         return  ResponseEntity.ok().build();
     }
 
-    @DeleteMapping
+    @DeleteMapping(path = "deleteTodolist")
     public ResponseEntity<?> deleteAll() {
         System.out.println("DELETE ALL");
         this.service.deleteAll();

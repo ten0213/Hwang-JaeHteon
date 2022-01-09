@@ -36,26 +36,6 @@
         }
 
 
-        ul li.checked {
-            background: #888;
-            color: #fff;
-            text-decoration: line-through;
-        }
-
-
-        ul li.checked::before {
-            content: '';
-            position: absolute;
-            border-color: #fff;
-            border-style: solid;
-            border-width: 0 2px 2px 0;
-            top: 10px;
-            left: 16px;
-            transform: rotate(45deg);
-            height: 15px;
-            width: 7px;
-        }
-
         .close {
             position: absolute;
             right: 0;
@@ -93,7 +73,7 @@
 
         .addBtn {
             padding: 10px;
-            width: 25%;
+            width: 13%;
             background: #d9d9d9;
             color: #555;
             float: left;
@@ -107,6 +87,7 @@
         .addBtn:hover {
             background-color: #bbb;
         }
+
     </style>
     <title>todolist</title>
 </head>
@@ -158,6 +139,7 @@
     }, false);
 
 
+
     function newElement() {
         const inputValue = document.getElementById("myInput").value;
         fetch("/", {
@@ -199,6 +181,8 @@
 
     }
 
+
+
     window.onload = function () {
         fetch("/todolist", {
             method: "GET",
@@ -210,11 +194,30 @@
         .then((res) => initTodoList(res));
     }
 
+
     const initTodoList = (todolist) => {
         const list = document.getElementById("myExistData");
         for (let i = 0; i < todolist.length; i++) {
             const li = document.createElement("li");
             li.innerText = todolist[i].title;
+            const span = document.createElement("span");
+            span.onclick = function() {
+                fetch("/todolist/"+id, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                })
+                    .then((res) => res.json())
+                    .then((res) => {
+                        // removeTodolist();
+                        initTodoList(res);
+                    });
+            }
+            const txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            li.appendChild(span);
             list.appendChild(li);
         }
     }
