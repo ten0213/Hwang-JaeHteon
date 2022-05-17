@@ -15,11 +15,15 @@ import java.util.stream.Collectors;
 
 @CrossOrigin
 @AllArgsConstructor
-@RestController
-@RequestMapping("/")
+@Controller
 public class TodoController {
 
     private final TodoService service;
+
+    @GetMapping(path = "/")
+    public String index() {
+        return "index";
+    }
 
     @PostMapping
     public ResponseEntity<TodoResponse> create(@RequestBody TodoRequest request) {
@@ -63,8 +67,8 @@ public class TodoController {
     @DeleteMapping(path = "/todo/{id}")
     public ResponseEntity<?> deleteOne(@PathVariable Long id) {
         System.out.println("DELETE ONE");
-        this.service.deleteById(id);
-        return  ResponseEntity.ok().build();
+        List<TodoEntity> result = service.deleteById(id);
+        return  ResponseEntity.ok(result);
     }
 
     @DeleteMapping(path = "/")
