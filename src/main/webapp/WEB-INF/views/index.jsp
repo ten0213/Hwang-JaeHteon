@@ -201,8 +201,6 @@
 
     }
 
-
-
     window.onload = function () {
         fetch("/todolist", {
             method: "GET",
