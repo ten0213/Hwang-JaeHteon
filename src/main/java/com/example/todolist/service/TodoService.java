@@ -6,6 +6,7 @@ import com.example.todolist.model.TodoRequest;
 import com.example.todolist.repository.TodoRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -50,9 +51,13 @@ public class TodoService {
         }
         return this.todoRepository.save(todoEntity);
     }
+
+
     //    5	todo 리스트 목록 중 특정 아이템을 삭제
-    public void deleteById(Long id) {
+    @Transactional
+    public List<TodoEntity> deleteById(Long id) {
         this.todoRepository.deleteById(id);
+        return todoRepository.findAll();
     }
     //    6	todo 리스트 전체 목록을 삭제
     public void deleteAll() {

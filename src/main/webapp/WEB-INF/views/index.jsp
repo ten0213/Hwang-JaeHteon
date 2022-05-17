@@ -35,6 +35,32 @@
             background: #ddd;
         }
 
+        /* Darker background-color on hover */
+        ul li:hover {
+            background: #ddd;
+        }
+
+        /* When clicked on, add a background color and strike out text */
+        ul li.checked {
+            background: #888;
+            color: #fff;
+            text-decoration: line-through;
+        }
+
+        /* Add a "checked" mark when clicked on */
+        ul li.checked::before {
+            content: '';
+            position: absolute;
+            border-color: #fff;
+            border-style: solid;
+            border-width: 0 2px 2px 0;
+            top: 10px;
+            left: 16px;
+            transform: rotate(45deg);
+            height: 15px;
+            width: 7px;
+        }
+
 
         .close {
             position: absolute;
@@ -95,17 +121,11 @@
 
 <div id="myDIV" class="header">
     <h2 style="margin:5px">My first project : ToDo List</h2>
-    <input type="text" id="myInput" placeholder="Title...">
+    <label for="myInput"></label><input type="text" id="myInput" placeholder="Title...">
     <span onclick="newElement()" class="addBtn">Add</span>
 </div>
 
 <ul id="myExistData">
-    <li>Hit the gym</li>
-    <li class="checked">pay eaten</li>
-    <li>go to SKHU</li>
-    <li>Buy eggs</li>
-    <li>Read a book</li>
-    <li>go to school club</li>
 </ul>
 
 <script>
@@ -190,8 +210,8 @@
                 "Content-Type": "application/json",
             }
         })
-        .then((res) => res.json())
-        .then((res) => initTodoList(res));
+            .then((res) => res.json())
+            .then((res) => initTodoList(res));
     }
 
 
@@ -219,6 +239,8 @@
             span.appendChild(txt);
             li.appendChild(span);
             list.appendChild(li);
+
+
         }
     }
 </script>

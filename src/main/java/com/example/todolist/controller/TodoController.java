@@ -37,13 +37,14 @@ public class TodoController {
         return ResponseEntity.ok(new TodoResponse(result));
     }
 
-    @GetMapping("{id}")
+    @GetMapping(path = "/todo/{id}")
     public ResponseEntity<TodoResponse> readOne(@PathVariable Long id) {
         System.out.println("READ ONE");
         TodoEntity result = this.service.searchById(id);
         return ResponseEntity.ok(new TodoResponse(result));
     }
-    @GetMapping(path = "todolist")
+
+    @GetMapping(path = "/todolist")
     public ResponseEntity<List<TodoResponse>> readAll() {
         System.out.println("READ ALL");
         List<TodoEntity> list = this.service.searchAll();
@@ -52,25 +53,24 @@ public class TodoController {
         return ResponseEntity.ok(response);
     }
 
-    @PatchMapping("{id}")
+    @PatchMapping(path = "/todo/{id}")
     public ResponseEntity<TodoEntity> update(@PathVariable Long id, @RequestBody TodoRequest request) {
         System.out.println("UPDATE");
         TodoEntity result = this.service.updateById(id, request);
         return ResponseEntity.ok(result);
     }
 
-    @DeleteMapping(path = "todolist/{id}")
+    @DeleteMapping(path = "/todo/{id}")
     public ResponseEntity<?> deleteOne(@PathVariable Long id) {
         System.out.println("DELETE ONE");
         this.service.deleteById(id);
         return  ResponseEntity.ok().build();
     }
 
-    @DeleteMapping(path = "deleteTodolist")
+    @DeleteMapping(path = "/")
     public ResponseEntity<?> deleteAll() {
         System.out.println("DELETE ALL");
         this.service.deleteAll();
         return ResponseEntity.ok().build();
     }
-
 }
