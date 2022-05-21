@@ -3,14 +3,15 @@
 <html>
 <head>
     <style>
+
         body {
             margin: 0;
             min-width: 250px;
         }
 
-        * {
+       /* * {
             box-sizing: border-box;
-        }
+        }*/
 
         ul li {
             cursor: pointer;
@@ -86,28 +87,31 @@
             display: table;
             clear: both;
         }
-
+        /* Style the input */
         input {
-            margin: 0;
-            border: none;
-            border-radius: 0;
-            width: 75%;
-            padding: 10px;
-            float: left;
             font-size: 16px;
+            width: 75%;
+            margin: 0;
+            padding: 10px;
+            border: none;
+
+
+            float: left;
+
         }
 
+        /* Style the "Add" button */
         .addBtn {
             padding: 10px;
-            width: 13%;
+            width: 10%;
             background: #d9d9d9;
+            border: 0;
             color: #555;
-            float: left;
-            text-align: center;
+            float: right;
+
             font-size: 16px;
             cursor: pointer;
-            transition: 0.3s;
-            border-radius: 0;
+
         }
 
         .addBtn:hover {
@@ -121,7 +125,7 @@
 
 <div id="myDIV" class="header">
     <h2 style="margin:5px">My first project : ToDo List</h2>
-    <label for="myInput"></label><input type="text" id="myInput" placeholder="Title...">
+    <label for="myInput"></label><input type="text" id="myInput" placeholder="Title..." title="insert your todo">
     <span onclick="newElement()" class="addBtn">Add</span>
 </div>
 
@@ -130,7 +134,7 @@
 
 <script>
 
-    var myNodeList = document.getElementsByTagName("LI");
+    var myNodeList = document.getElementsByTagName("li");
     var i;
     for (i = 0; i < myNodeList.length; i++) {
         var span = document.createElement("SPAN");
@@ -162,6 +166,7 @@
 
     function newElement() {
         const inputValue = document.getElementById("myInput").value;
+        const todoOrder = document.getElementById("")
         fetch("/", {
             method: "POST",
             headers: {
@@ -180,7 +185,9 @@
         li.appendChild(t);
         if (inputValue === '') {
             alert("You must write something!");
-        } else {
+        } else
+        {
+            alert("Your todo will be added");
             document.getElementById("myExistData").appendChild(li);
         }
         document.getElementById("myInput").value = "";
@@ -220,6 +227,7 @@
             li.innerText = todolist[i].title;
             const span = document.createElement("span");
             span.onclick = function() {
+
                 fetch("/todolist/"+id, {
                     method: "DELETE",
                     headers: {
