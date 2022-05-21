@@ -166,7 +166,6 @@
 
     function newElement() {
         const inputValue = document.getElementById("myInput").value;
-        const todoOrder = document.getElementById("")
         fetch("/", {
             method: "POST",
             headers: {
@@ -175,7 +174,7 @@
             body: JSON.stringify({
                 title: inputValue,
                 order: 1,
-                completed: true
+                completed: false
             }),
         })
             .then((res) => res.json())
@@ -208,6 +207,7 @@
 
     }
 
+
     window.onload = function () {
         fetch("/todolist", {
             method: "GET",
@@ -218,6 +218,7 @@
             .then((res) => res.json())
             .then((res) => initTodoList(res));
     }
+
 
 
     const initTodoList = (todolist) => {
@@ -236,7 +237,6 @@
                 })
                     .then((res) => res.json())
                     .then((res) => {
-                        // removeTodolist();
                         initTodoList(res);
                     });
             }
@@ -245,8 +245,6 @@
             span.appendChild(txt);
             li.appendChild(span);
             list.appendChild(li);
-
-
         }
     }
 </script>
