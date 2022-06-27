@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>-->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+-->
 
 <html>
 <head>
@@ -8,10 +9,6 @@
             margin: 0;
             min-width: 250px;
         }
-
-       /* * {
-            box-sizing: border-box;
-        }*/
 
         ul li {
             cursor: pointer;
@@ -87,6 +84,7 @@
             display: table;
             clear: both;
         }
+
         /* Style the input */
         input {
             font-size: 16px;
@@ -148,7 +146,7 @@
     var close = document.getElementsByClassName("close");
     var i;
     for (i = 0; i < close.length; i++) {
-        close[i].onclick = function() {
+        close[i].onclick = function () {
             var div = this.parentElement;
             div.style.display = "none";
         }
@@ -156,12 +154,11 @@
 
 
     var list = document.querySelector('ul');
-    list.addEventListener('click', function(ev) {
+    list.addEventListener('click', function (ev) {
         if (ev.target.tagName === 'LI') {
             ev.target.classList.toggle('checked');
         }
     }, false);
-
 
 
     function newElement() {
@@ -184,8 +181,7 @@
         li.appendChild(t);
         if (inputValue === '') {
             alert("You must write something!");
-        } else
-        {
+        } else {
             alert("Your todo will be added");
             document.getElementById("myExistData").appendChild(li);
         }
@@ -198,7 +194,7 @@
         li.appendChild(span);
 
         for (i = 0; i < close.length; i++) {
-            close[i].onclick = function() {
+            close[i].onclick = function () {
                 const div = this.parentElement;
                 div.style.display = "none";
             }
@@ -220,16 +216,15 @@
     }
 
 
-
     const initTodoList = (todolist) => {
         const list = document.getElementById("myExistData");
         for (let i = 0; i < todolist.length; i++) {
             const li = document.createElement("li");
             li.innerText = todolist[i].title;
             const span = document.createElement("span");
-            span.onclick = function() {
+            span.onclick = function () {
 
-                fetch("/todolist/"+id, {
+                fetch("/todolist/" + id, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
